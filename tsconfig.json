@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "blogbackendsanity/schemas/schema.js", "blogbackendsanity/schemas/post.js", "blogbackendsanity/schemas/category.js", "blogbackendsanity/schemas/blockContent.js", "blogbackendsanity/schemas/author.js"],
   "exclude": ["node_modules"]
 }
