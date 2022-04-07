@@ -4,12 +4,18 @@ import Header from '../../components/header'
 import { urlFor, sanityClient } from '../../sanity'
 import { GetStaticProps } from 'next'
 import PortableText from 'react-portable-text'
+import { MdOutlineComment, MdOutlineSaveAlt } from 'react-icons/md'
+import { AiOutlineLike, AiFillLike } from 'react-icons/ai'
+import { IoShareOutline } from 'react-icons/io5'
 
 interface Props {
   post: Post
 }
 
 function ShowPost({ post }: Props) {
+  const [liked, setLiked] = React.useState(false)
+  const likesCount = '2.5k'
+  const commentsCount = '26'
   return (
     <main>
       <Header />
@@ -40,7 +46,7 @@ function ShowPost({ post }: Props) {
         <h4 className="py-6 text-5xl font-bold">{post.title}</h4>
         <em className="text-xl">{post.description}</em>
 
-        <div className="my-5 text-justify">
+        <div className="text-justify">
           <PortableText
             className=""
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
@@ -64,6 +70,39 @@ function ShowPost({ post }: Props) {
               p: (props: any) => <p className="my-5 text-lg" {...props} />,
             }}
           />
+        </div>
+
+        <div className="flex m-w-7xl py-8 text-3xl items-center">
+          <div className="mr-1 cursor-pointer">
+            {liked ? (
+              <AiFillLike onClick={() => setLiked(false)} />
+            ) : (
+              <AiOutlineLike onClick={() => setLiked(true)} />
+            )}
+          </div>
+          <span className="flex items-center text-sm font-bold text-gray-600">
+            {likesCount}
+          </span>
+          <span className="flex cursor-pointer px-12">
+            <MdOutlineComment />
+            <span className="ml-1 flex items-center text-sm font-bold text-gray-600">
+              {commentsCount}
+            </span>
+          </span>
+          <div className="ml-auto flex cursor-pointer gap-12">
+            <div>
+              <IoShareOutline />
+              <span className="flex items-center justify-center text-sm font-bold text-gray-600">
+                Share
+              </span>
+            </div>
+            <div>
+              <MdOutlineSaveAlt />
+              <span className="flex items-center justify-center text-sm font-bold text-gray-600">
+                Save
+              </span>
+            </div>
+          </div>
         </div>
       </article>
     </main>
